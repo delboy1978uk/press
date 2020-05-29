@@ -9,10 +9,13 @@
         }
     ],
     "require": {
+        "doctrine/orm": "^2.7",
+        "delboy1978uk/barnacle": "^2.3"
     },
     "require-dev":{
         "codeception/codeception":"^4.1",
-        "codeception/module-asserts": "^1.1"
+        "codeception/module-asserts": "^1.1",
+        "delboy1978uk/bone-doctrine": "^1.2"
     },
     "autoload":{
         "psr-4":{
