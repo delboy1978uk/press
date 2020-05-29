@@ -4,5 +4,7 @@ namespace Del\Press\Block;
 
 interface BlockInterface
 {
+    public function getContent(): string;
     public function render(): string;
+    public function setContent(string $content): void;
 }

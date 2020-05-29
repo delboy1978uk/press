@@ -2,13 +2,13 @@
 
 namespace Del\Press\Block;
 
-class Block implements BlockInterface
+class Paragraph extends AbstractBlock
 {
     /**
      * @return string
      */
     public function render(): string
     {
-        return '<h1>Hello World</h1>';
+        return '<p>' . $this->content . '</p>';
     }
 }

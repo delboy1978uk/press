@@ -1,9 +1,10 @@
 <?php
 
 use Codeception\TestCase\Test;
+use Del\Press\Block\Header;
+use Del\Press\Block\Paragraph;
 use Del\Press\Page\Page;
 use Del\Press\Page\PageInterface;
-use Del\Press\Block\Block;
 
 class PageTest extends Test
 {
@@ -35,7 +36,7 @@ class PageTest extends Test
         $this->page->setPublishedDate(new DateTime('2014-09-18'));
         $this->page->setTags(['awesome', 'features']);
         $this->page->setIsPublished(true);
-        $block = new Block();
+        $block = new Header();
         $this->page->addBlock($block);
 
         $this->assertEquals(0, $this->page->getId());
@@ -49,8 +50,9 @@ class PageTest extends Test
         $this->assertTrue($this->page->isPublished());
 
         $blocks = $this->page->getBlocks();
-        $blocks[] = new Block();
+        $blocks[] = new Header('Wow');
+        $blocks[] = new Paragraph('This is freaking awesome');
         $this->page->setBlocks($blocks);
-        $this->assertCount(2, $this->page->getBlocks());
+        $this->assertCount(3, $this->page->getBlocks());
     }
 }

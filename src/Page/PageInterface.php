@@ -4,11 +4,12 @@ namespace Del\Press\Page;
 
 use DateTime;
 use Del\Press\Block\BlockInterface;
+use Doctrine\Common\Collections\Collection;
 
 interface PageInterface
 {
     public function addBlock(BlockInterface $block): void;
-    public function getBlocks(): array;
+    public function getBlocks(): Collection;
     public function getId(): int;
     public function getPublishedDate(): DateTime;
     public function getSlug(): string;
@@ -16,7 +17,7 @@ interface PageInterface
     public function getTags(): array;
     public function getUserId(): int;
     public function isPublished(): bool;
-    public function setBlocks(array $blocks): void;
+    public function setBlocks(Collection $blocks): void;
     public function setSlug(string $slug): void;
     public function setTitle(string $title): void;
     public function setIsPublished(bool $isPublished): void;

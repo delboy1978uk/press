@@ -4,36 +4,48 @@ namespace Del\Press\Page;
 
 use DateTime;
 use Del\Press\Block\BlockInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
+/** @ORM\Entity */
 class Page implements PageInterface
 {
     /**
      * @var int $id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
      */
     private $id = 0;
 
     /**
      * @var int $id
+     * @ORM\Column(type="integer",length=6, nullable=true)
      */
     private $userId = 0;
 
     /**
      * @var bool $isPublished
+     * @ORM\Column(type="boolean")
      */
     private $isPublished = false;
 
     /**
      * @var DateTime $publishedDate
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $publishedDate;
 
     /**
      * @var string $slug
+     * @ORM\Column(type="string",length=100,nullable=true)
      */
     private $slug = '';
 
     /**
      * @var string $title
+     * @ORM\Column(type="string",length=100,nullable=true)
      */
     private $title = '';
 
@@ -43,9 +55,10 @@ class Page implements PageInterface
     private $tags = [];
 
     /**
-     * @var array $blocks
+     * @var Collection $blocks
+     * @ORM\OneToMany(targetEntity="Del\Press\Block\BlockDescriptor", mappedBy="product")
      */
-    private $blocks = [];
+    private $blocks;
 
     /**
      * Page constructor.
@@ -53,6 +66,7 @@ class Page implements PageInterface
     public function __construct()
     {
         $this->publishedDate = new DateTime();
+        $this->blocks = new ArrayCollection();
     }
 
     public function getId(): int
@@ -146,17 +160,17 @@ class Page implements PageInterface
     }
 
     /**
-     * @return array
+     * @return ArrayCollection
      */
-    public function getBlocks(): array
+    public function getBlocks(): Collection
     {
         return $this->blocks;
     }
 
     /**
-     * @param array $blocks
+     * @param Collection $blocks
      */
-    public function setBlocks(array $blocks): void
+    public function setBlocks(Collection $blocks): void
     {
         $this->blocks = $blocks;
     }

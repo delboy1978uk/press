@@ -2,7 +2,7 @@
 composer.phar
 composer.lock
 vendor/
-
+cli-config.php
 #ide
 .idea/
 

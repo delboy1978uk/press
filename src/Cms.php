@@ -19,10 +19,15 @@ class Cms
 
     /**
      * @return PageInterface
+     * @throws \Doctrine\ORM\ORMException
      */
     public function createPage(): PageInterface
     {
-        return new Page();
+        $page = new Page();
+        $this->em->persist($page);
+        $this->em->flush($page);
+
+        return $page;
     }
 
     /**
@@ -31,21 +36,37 @@ class Cms
      */
     public function fetchPage(string $slugOrId): ?PageInterface
     {
-        return null;
+        $repo = $this->em->getRepository(Page::class);
+        /** @var Page $page */
+        $page = is_numeric($slugOrId)
+        ? $repo->find($slugOrId)
+        : $repo->findOneBy(['slug' => $slugOrId]);
+
+        return $page;
     }
 
     /**
      * @param PageInterface $page
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function upatePage(PageInterface $page): bool
+    public function updatePage(PageInterface $page): bool
     {
-        return false;
+        $this->em->flush($page);
+
+        return true;
     }
 
+    /**
+     * @param PageInterface $page
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function deletePage(PageInterface $page): void
     {
-
+        $this->em->remove($page);
+        $this->em->flush();
     }
 
     /**

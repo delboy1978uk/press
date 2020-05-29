@@ -3,6 +3,7 @@
 use Barnacle\Container;
 use Bone\BoneDoctrine\BoneDoctrinePackage;
 use Codeception\TestCase\Test;
+use Del\Press\Block\Header;
 use Del\Press\Cms;
 use Del\Press\Page\PageInterface;
 use Del\Press\Block\Block;
@@ -51,7 +52,7 @@ class CmsTest extends Test
     }
 
     /**
-     * Check tests are working
+     * @throws \Doctrine\ORM\ORMException
      */
     public function testCreatePage()
     {
@@ -59,12 +60,24 @@ class CmsTest extends Test
     }
 
     /**
-     * Check tests are working
+     * @throws \Doctrine\ORM\ORMException
      */
     public function testRenderPage()
     {
         $page = $this->cms->createPage();
-        $block = new Block();
+        $block = new Header('Hello World');
+        $page->addBlock($block);
+        $this->assertEquals('<h1>Hello World</h1>', $this->cms->renderPage($page));
+    }
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function testRenderPageUsingSetContent()
+    {
+        $page = $this->cms->createPage();
+        $block = new Header();
+        $block->setContent('Hello World');
         $page->addBlock($block);
         $this->assertEquals('<h1>Hello World</h1>', $this->cms->renderPage($page));
     }
