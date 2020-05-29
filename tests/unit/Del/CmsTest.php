@@ -1,8 +1,9 @@
 <?php
 
-namespace Del;
 
-class BlankTest extends \Codeception\TestCase\Test
+use Del\Press\Cms;
+
+class CmsTest extends \Codeception\TestCase\Test
 {
     /**
      * @var \UnitTester
@@ -10,20 +11,20 @@ class BlankTest extends \Codeception\TestCase\Test
     protected $tester;
 
     /**
-     * @var Blank
+     * @var Cms
      */
-    protected $blank;
+    protected $cms;
 
     protected function _before()
     {
         // create a fresh blank class before each test
-        $this->blank = new Blank();
+        $this->cms = new Cms();
     }
 
     protected function _after()
     {
         // unset the blank class after each test
-        unset($this->blank);
+        unset($this->cms);
     }
 
     /**
@@ -31,8 +32,6 @@ class BlankTest extends \Codeception\TestCase\Test
      */
     public function testBlah()
     {
-        $this->assertEquals('Ready to start building tests', $this->blank->blah());
+        $this->assertEquals('Ready to start building tests', $this->cms->blah());
     }
-
-
 }

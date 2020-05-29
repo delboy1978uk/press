@@ -1,14 +1,8 @@
 <?php
-/**
- * User: delboy1978uk
- * Date: 14/08/15
- * Time: 15:56
- */
 
-namespace Del;
+namespace Del\Press;
 
-
-class Blank
+class Cms
 {
     /**
      * @return string

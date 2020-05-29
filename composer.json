@@ -1,6 +1,6 @@
 {
-    "name": "delboy1978uk/blank",
-    "description": "A blank project",
+    "name": "delboy1978uk/press",
+    "description": "Press is a CMS backend",
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,7 @@
     },
     "autoload":{
         "psr-4":{
-            "Del\\":"src/"
+            "Del\\Press\\":"src/"
         }
     }
 }
