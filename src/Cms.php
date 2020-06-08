@@ -3,9 +3,11 @@
 namespace Del\Press;
 
 use Del\Press\Block\Block;
+use Del\Press\Block\BlockDescriptor;
 use Del\Press\Page\Page;
 use Del\Press\Page\PageInterface;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 class Cms
 {
@@ -83,5 +85,21 @@ class Cms
         }
 
         return $html;
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    public function getPageRepository(): EntityRepository
+    {
+        return $this->em->getRepository(Page::class);
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    public function getBlockRepository(): EntityRepository
+    {
+        return $this->em->getRepository(BlockDescriptor::class);
     }
 }
