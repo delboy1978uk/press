@@ -56,7 +56,7 @@ class Page implements PageInterface
 
     /**
      * @var Collection $blocks
-     * @ORM\OneToMany(targetEntity="Del\Press\Block\BlockDescriptor", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Del\Press\Block\BlockDescriptor", mappedBy="page")
      */
     private $blocks;
 
