@@ -4,6 +4,7 @@ namespace Del\Press;
 
 use Del\Press\Block\Block;
 use Del\Press\Block\BlockDescriptor;
+use Del\Press\Block\BlockInterface;
 use Del\Press\Block\Header;
 use Del\Press\Block\Image;
 use Del\Press\Block\Link;
@@ -32,7 +33,7 @@ class Cms
     public function __construct(EntityManager $entityManager)
     {
         $this->em = $entityManager;
-        $this->editor = new Editor();
+        $this->editor = new Editor($entityManager);
     }
 
     /**
@@ -95,12 +96,41 @@ class Cms
         $html = '';
         $blocks = $page->getBlocks();
 
-        /** @var Block $block */
-        foreach ($blocks as $block) {
+        /** @var BlockDescriptor $descriptor */
+        foreach ($blocks as $descriptor) {
+            $block = $this->getBlockRenderer($descriptor);
             $html .= $block->render();
         }
 
         return $html;
+    }
+
+    /**
+     * @param PageInterface $page
+     */
+    public function getBlockRenderers(PageInterface $page)
+    {
+        $blocks = [];
+        $descriptors = $page->getBlocks();
+
+        foreach ($descriptors as $descriptor) {
+            $blocks[] = $this->getBlockRenderer($descriptor);
+        }
+
+        return $blocks;
+    }
+
+    /**
+     * @param BlockDescriptor $descriptor
+     * @return BlockInterface
+     */
+    public function getBlockRenderer(BlockDescriptor $descriptor): BlockInterface
+    {
+        $class = $descriptor->getClass();
+        $block = new $class();
+        $block->setContent($descriptor->getContent());
+
+        return $block;
     }
 
     /**

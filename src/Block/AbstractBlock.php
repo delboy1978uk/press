@@ -31,8 +31,11 @@ abstract class AbstractBlock implements BlockInterface
     /**
      * @return string
      */
-    public function renderEditor(): string
+    public function getBlockType(): string
     {
-        return '<h3>FAIL</h3>';
+        $class = \get_class($this);
+        $ex = \explode('\\', $class);
+
+        return end($ex);
     }
 }

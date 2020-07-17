@@ -8,4 +8,5 @@ interface BlockInterface
     public function render(): string;
     public function renderEditor(): string;
     public function setContent(string $content): void;
+    public function getBlockType(): string;
 }

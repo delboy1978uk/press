@@ -25,4 +25,13 @@ class Link extends AbstractBlock
     {
         return '<a href="' . $this->href .'">' . $this->content . '</a>';
     }
+
+    /**
+     * @return string
+     */
+    public function renderEditor(): string
+    {
+        return '<input class="form-control" type="text" placeholder="Type your URL here" />
+                <input class="form-control" type="text" placeholder="Type your display text here.."/>';
+    }
 }

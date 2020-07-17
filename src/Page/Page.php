@@ -57,6 +57,7 @@ class Page implements PageInterface
     /**
      * @var Collection $blocks
      * @ORM\OneToMany(targetEntity="Del\Press\Block\BlockDescriptor", mappedBy="page")
+     * @ORM\OrderBy({"pageOrder" = "ASC"})
      */
     private $blocks;
 

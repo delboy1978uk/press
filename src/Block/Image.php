@@ -11,9 +11,9 @@ class Image extends AbstractBlock
      * Link constructor.
      * @param string $src
      */
-    public function __construct(string $src)
+    public function __construct(string $src = '')
     {
-        $this->src = $href;
+        $this->src = $src;
     }
 
     /**
@@ -22,5 +22,14 @@ class Image extends AbstractBlock
     public function render(): string
     {
         return '<img src="' . $this->src .'" />';
+    }
+
+
+    /**
+     * @return string
+     */
+    public function renderEditor(): string
+    {
+        return '<input class="form-control" type="file" />';
     }
 }

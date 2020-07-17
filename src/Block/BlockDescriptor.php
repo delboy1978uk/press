@@ -30,10 +30,10 @@ class BlockDescriptor
     private $page;
 
     /**
-     * @var int $order
+     * @var int $pageOrder
      * @ORM\Column(type="integer", length=3)
      */
-    private $order;
+    private $pageOrder;
 
     /**
      * @var string $class
@@ -74,17 +74,17 @@ class BlockDescriptor
     /**
      * @return int
      */
-    public function getOrder(): int
+    public function getPageOrder(): int
     {
-        return $this->order;
+        return $this->pageOrder;
     }
 
     /**
-     * @param int $order
+     * @param int $pageOrder
      */
-    public function setOrder(int $order): void
+    public function setPageOrder(int $pageOrder): void
     {
-        $this->order = $order;
+        $this->pageOrder = $pageOrder;
     }
 
     /**
