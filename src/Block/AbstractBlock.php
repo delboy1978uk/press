@@ -27,4 +27,12 @@ abstract class AbstractBlock implements BlockInterface
     {
         $this->content = $content;
     }
+
+    /**
+     * @return string
+     */
+    public function renderEditor(): string
+    {
+        return '<h3>FAIL</h3>';
+    }
 }

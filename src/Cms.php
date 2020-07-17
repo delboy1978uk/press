@@ -4,6 +4,11 @@ namespace Del\Press;
 
 use Del\Press\Block\Block;
 use Del\Press\Block\BlockDescriptor;
+use Del\Press\Block\Header;
+use Del\Press\Block\Image;
+use Del\Press\Block\Link;
+use Del\Press\Block\Paragraph;
+use Del\Press\Page\Editor;
 use Del\Press\Page\Page;
 use Del\Press\Page\PageInterface;
 use Doctrine\ORM\EntityManager;
@@ -11,12 +16,23 @@ use Doctrine\ORM\EntityRepository;
 
 class Cms
 {
+    const DEFAULT_BLOCK_TYPES = [
+        Header::class => 'Header',
+        Image::class => 'Image',
+        Link::class => 'Link',
+        Paragraph::class => 'Paragraph',
+    ];
+
     /** @var EntityManager $em */
     private $em;
+
+    /** @var Editor $editor */
+    private $editor;
 
     public function __construct(EntityManager $entityManager)
     {
         $this->em = $entityManager;
+        $this->editor = new Editor();
     }
 
     /**
@@ -88,6 +104,17 @@ class Cms
     }
 
     /**
+     * @return array
+     */
+    public function getBlockTypes(): array
+    {
+        $packagedBlockTypes = self::DEFAULT_BLOCK_TYPES;
+        $customBlockTypes = [];
+
+        return array_merge($packagedBlockTypes, $customBlockTypes);
+    }
+
+    /**
      * @return EntityRepository
      */
     public function getPageRepository(): EntityRepository
@@ -101,5 +128,13 @@ class Cms
     public function getBlockRepository(): EntityRepository
     {
         return $this->em->getRepository(BlockDescriptor::class);
+    }
+
+    /**
+     * @return Editor
+     */
+    public function getPageEditor(): Editor
+    {
+        return $this->editor;
     }
 }
