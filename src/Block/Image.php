@@ -14,6 +14,7 @@ class Image extends AbstractBlock
     public function __construct(string $src = '')
     {
         $this->src = $src;
+        $this->content = '';
     }
 
     /**

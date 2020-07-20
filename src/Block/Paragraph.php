@@ -17,6 +17,6 @@ class Paragraph extends AbstractBlock
      */
     public function renderEditor(): string
     {
-        return '<textarea class="form-control" placeholder="Type your paragraph here.."></textarea>';
+        return '<textarea class="form-control" placeholder="Type your paragraph here..">' . $this->content . '</textarea>';
     }
 }

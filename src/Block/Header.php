@@ -31,6 +31,6 @@ class Header extends AbstractBlock
      */
     public function renderEditor(): string
     {
-        return '<input type="text" placeholder="Type a header.." class="form-control block-header" />';
+        return '<input type="text" placeholder="Type a header.." class="form-control block-header" value="' . $this->content . '"/>';
     }
 }

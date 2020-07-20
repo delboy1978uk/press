@@ -57,8 +57,11 @@ class Editor
      */
     private function renderBlockEditorDiv(BlockInterface $block): string
     {
-        $html = '<div class="panel panel-primary">
-                  <div class="panel-heading"><h3 class="panel-title">' . $block->getBlockType() . '</h3></div>
+        $html = '<div class="panel panel-primary page-block">
+                  <div class="panel-heading">
+                      <button type="button" class="close tt" title="Delete ' . $block->getBlockType() . '" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h3 class="panel-title">' . $block->getBlockType() . '</h3>
+                  </div>
                   <div class="panel-body">';
         $html .= $block->renderEditor();
         $html .= '</div>
